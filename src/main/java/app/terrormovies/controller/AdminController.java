@@ -1,5 +1,6 @@
 package app.terrormovies.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AdminController {
 
 
-	@RequestMapping("movies")
+	@RequestMapping(value = "movies")
 	@ResponseBody
 	public String createMovie(@RequestBody String movie) {
 		System.out.println("Adding movie! " + movie);
 
-		return "created";
+		return "{status:created}";
 	}
  }

@@ -10,6 +10,7 @@
 
     <security:http auto-config="true">
         <security:intercept-url pattern="/admin/**/*" access="ROLE_ADMIN" />
+        <security:form-login login-page="/custom_login" authentication-failure-url="/custom_login?error"/>
     </security:http>
 
     <security:authentication-manager>
