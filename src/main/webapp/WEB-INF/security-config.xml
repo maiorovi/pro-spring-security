@@ -8,19 +8,32 @@
      http://www.springframework.org/schema/security/spring-security-3.1.xsd ">
 
 
-    <security:http auto-config="true">
+    <security:http auto-config="true" entry-point-ref="digestEntryPoint">
         <security:intercept-url pattern="/admin/**/*" access="ROLE_ADMIN" />
-        <security:form-login login-page="/custom_login" authentication-failure-url="/custom_login?error"
-         authentication-failure-handler-ref="serverErrorHandler"/>
+        <security:custom-filter ref="digestFilter" before="BASIC_AUTH_FILTER" />
+        <!--<security:http-basic />-->
+        <!--<security:form-login login-page="/custom_login" authentication-failure-url="/custom_login?error"-->
+         <!--authentication-failure-handler-ref="serverErrorHandler"/>-->
     </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider>
-            <security:user-service>
+            <security:user-service id="userService">
                 <security:user name="admin" authorities="ROLE_ADMIN" password="admin" />
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
+
+    <bean id="digestFilter" class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter ">
+        <property name="userDetailsService" ref="userService" />
+        <property name="authenticationEntryPoint" ref="digestEntryPoint" />
+    </bean>
+
+    <bean id="digestEntryPoint" class=
+            "org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint ">
+        <property name="realmName" value="terrormovies-realm"/>
+        <property name="key" value="terrorific" />
+    </bean>
 
     <bean id="serverErrorHandler" class="app.terrormovies.handler.ServerErrorFailureHandler" />
 </beans>
