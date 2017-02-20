@@ -18,7 +18,7 @@ public class AdminController {
 	public @ResponseBody String createMovie(@RequestBody String movie) {
 		System.out.println("Adding movie! " + movie);
 
-		return new String("created movie");
+		return "{status: suc, action : created}";
 	}
 
 	@RequestMapping(value = "movies", method = RequestMethod.GET)
