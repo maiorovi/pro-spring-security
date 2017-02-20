@@ -8,11 +8,28 @@
      http://www.springframework.org/schema/security/spring-security-3.1.xsd ">
 
 
+    <!--form auth-->
+    <!--<security:http auto-config="true">-->
+        <!--<security:intercept-url pattern="/admin/**/*" access="ROLE_ADMIN" />-->
+        <!--<security:form-login login-page="/custom_login" authentication-failure-url="/custom_login?error"-->
+         <!--authentication-failure-handler-ref="serverErrorHandler"/>-->
+    <!--</security:http>-->
+
+    <!--basci auth-->
+    <!--<security:http auto-config="true">-->
+        <!--<security:intercept-url pattern="/admin/**/*" access="ROLE_ADMIN" />-->
+        <!--<security:http-basic />-->
+    <!--</security:http>-->
+
+    <!--remember me auth-->
     <security:http auto-config="true">
+        <security:remember-me key="terror-key" />
         <security:intercept-url pattern="/admin/**/*" access="ROLE_ADMIN" />
         <security:form-login login-page="/custom_login" authentication-failure-url="/custom_login?error"
-         authentication-failure-handler-ref="serverErrorHandler"/>
+        authentication-failure-handler-ref="serverErrorHandler"/>
     </security:http>
+
+
 
     <security:authentication-manager>
         <security:authentication-provider>

@@ -14,8 +14,8 @@
 <form action="/j_spring_security_check"  method="post">
     Username<input type="text" name="j_username"/><br/>
     Password<input type="text" name="j_password"/><br/>
+    <input type="checkbox" name="_spring_security_remember_me" value="yes"/>
     <input type="submit"/>
 </form>
 </body>
 </html>
-Listing 4-11
